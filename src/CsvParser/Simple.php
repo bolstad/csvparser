@@ -34,7 +34,7 @@ class Simple {
 		$header = fgetcsv( $fh, $lineLength, $delimiter, $enclosure, $escape );
 		print_r( $header );
 		$data = array();
-		while ( $line = fgetcsv( $fh ) ) {
+		while ( $line = fgetcsv( $fh, $lineLength, $delimiter, $enclosure, $escape ) ) {
 			$data = array_combine( $header, $line );
 			call_user_func( $callback, $data );
 			$foundRows++;
