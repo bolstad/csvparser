@@ -2,10 +2,46 @@
 namespace CsvParser;
 
 class Simple {
-	public function parseRowByRow( $filname = '', $callback = '' ) {
-		if (empty($filname) || empty($callback)) 
-	        throw new \Exception('Missing parameters');
-		echo "hi\n";
+
+	/**
+	 * Parse a CSV using Php's fgetcsv() and send each rows record to the $callback function
+	 *
+	 * @param string  $filename  File to parse
+	 * @param string  $callback  Callback function to send data to
+	 * @param int     $line      Length - Must be greater than the longest line (in characters) to be found in the CSV file (allowing for trailing line-end characters).
+	 * @param str     $delimiter Set the field delimiter (one character only).
+	 * @param str     $enclosure Set the field enclosure character (one character only)
+	 * @param type    $escape    Set the escape character (one character only). Defaults as a backslash.
+	 * @return bool
+	 */
+	public function parseRowByRow(
+		$filename = '',
+		$callback = '',
+		$lineLength = 2000,
+		$delimiter = ',',
+		$enclosure = '"',
+		$escape = '\\'  ) {
+
+		$foundRows = 0;
+
+		if ( empty( $filename ) || empty( $callback ) )
+			throw new \Exception( 'Missing parameters' );
+
+		// Examine the data read by to see if it is using Unix, MS-Dos or Macintosh line-ending conventions.
+		ini_set( "auto_detect_line_endings", true );
+
+		$fh = fopen( $filename, 'r' );
+		$header = fgetcsv( $fh, $lineLength, $delimiter, $enclosure, $escape );
+		print_r( $header );
+		$data = array();
+		while ( $line = fgetcsv( $fh ) ) {
+			$data = array_combine( $header, $line );
+			call_user_func( $callback, $data );
+			$foundRows++;
+		}
+
+		fclose( $fh );
+		return $foundRows;
 	}
 
 }
