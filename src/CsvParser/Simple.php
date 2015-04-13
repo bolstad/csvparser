@@ -32,7 +32,6 @@ class Simple {
 
 		$fh = fopen( $filename, 'r' );
 		$header = fgetcsv( $fh, $lineLength, $delimiter, $enclosure, $escape );
-		print_r( $header );
 		$data = array();
 		while ( $line = fgetcsv( $fh, $lineLength, $delimiter, $enclosure, $escape ) ) {
 			$data = array_combine( $header, $line );
