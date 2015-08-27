@@ -17,7 +17,20 @@ A simple system for parsing CSV-files row by row and sending the data to a callb
   	print_r( $data );
   }
 
-  // For reach row in file.csv - send and associative array with data to the function 'handler'
+  /* 
+  
+  Parameters for parseRowByRow: 
+  
+   * @param string  $filename  File to parse
+	 * @param string  $callback  Callback function to send data to
+	 * @param int     $line      Length - Must be greater than the longest line (in characters) to be found in the CSV file (allowing for trailing line-end characters).
+	 * @param str     $delimiter Set the field delimiter (one character only).
+	 * @param str     $enclosure Set the field enclosure character (one character only)
+	 * @param type    $escape    Set the escape character (one character only). Defaults as a backslash.
+	 * @return bool
+ */
+
+  
   Simple::parseRowByRow('file.csv' ,'handler');
 
 ```
