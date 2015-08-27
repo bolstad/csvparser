@@ -10,6 +10,8 @@ A simple system for parsing CSV-files row by row and sending the data to a callb
 
 ```php
 
+  use CsvParser\Simple;
+
   function handler ( $data ) {
   	print_r( $data);
   }
