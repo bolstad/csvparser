@@ -12,6 +12,7 @@ class Simple {
 	 * @param str     $delimiter Set the field delimiter (one character only).
 	 * @param str     $enclosure Set the field enclosure character (one character only)
 	 * @param type    $escape    Set the escape character (one character only). Defaults as a backslash.
+     * @param bool    $autoDetectHeader Try to auto detect header rows - if false, line 1 i always used
 	 * @return bool
 	 */
 	public function parseRowByRow(
@@ -20,7 +21,9 @@ class Simple {
 		$lineLength = 2000,
 		$delimiter = ',',
 		$enclosure = '"',
-		$escape = '\\'  ) {
+		$escape = '\\',
+        $autoDetectHeader = 1)
+      {
 
 		$foundRows = 0;
 
@@ -31,7 +34,20 @@ class Simple {
 		ini_set( "auto_detect_line_endings", true );
 
 		$fh = fopen( $filename, 'r' );
-		$header = fgetcsv( $fh, $lineLength, $delimiter, $enclosure, $escape );
+
+		if ($autoDetectHeader) {
+            $tcount = 1;
+            while ($tcount == 1) {
+                $header = fgetcsv($fh, $lineLength, $delimiter, $enclosure, $escape);
+                $tcount = count($header);
+                echo "$tcount\n";
+            }
+        }
+
+        if (!$autoDetectHeader) {
+            $header = fgetcsv($fh, $lineLength, $delimiter, $enclosure, $escape);
+        }
+
 		$data = array();
 		while ( $line = fgetcsv( $fh, $lineLength, $delimiter, $enclosure, $escape ) ) {
 			$data = array_combine( $header, $line );
