@@ -41,5 +41,5 @@ A simple system for parsing CSV-files row by row and sending the data to a callb
 
 2014-07-23 Ver 0.1.3	- Quick hack, initial release
 2015-08-27 Ver 0.1.4 	- Updated README with example code
-2018-03-02 Ver 0.2.1    - Attempt to auto detect if first row of file doesn't have the correct header info. 
+2018-03-02 Ver 0.2.2    - Attempt to auto detect if first row of file doesn't have the correct header info. 
 

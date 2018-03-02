@@ -40,7 +40,6 @@ class Simple {
             while ($tcount == 1) {
                 $header = fgetcsv($fh, $lineLength, $delimiter, $enclosure, $escape);
                 $tcount = count($header);
-                echo "$tcount\n";
             }
         }
 
