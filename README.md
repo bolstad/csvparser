@@ -27,6 +27,7 @@ A simple system for parsing CSV-files row by row and sending the data to a callb
 	 * @param str     $delimiter Set the field delimiter (one character only).
 	 * @param str     $enclosure Set the field enclosure character (one character only)
 	 * @param type    $escape    Set the escape character (one character only). Defaults as a backslash.
+     * @param bool    $autoDetectHeader Try to auto detect header rows - if false, line 1 i always used
 	 * @return bool
  */
 
@@ -40,3 +41,5 @@ A simple system for parsing CSV-files row by row and sending the data to a callb
 
 2014-07-23 Ver 0.1.3	- Quick hack, initial release
 2015-08-27 Ver 0.1.4 	- Updated README with example code
+2018-03-02 Ver 0.2      - Attempt to auto detect if first row of file doesn't have the correct header info. 
+
