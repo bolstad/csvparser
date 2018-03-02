@@ -35,11 +35,16 @@ class Simple {
 
 		$fh = fopen( $filename, 'r' );
 
+
 		if ($autoDetectHeader) {
             $tcount = 1;
             while ($tcount == 1) {
-                $header = fgetcsv($fh, $lineLength, $delimiter, $enclosure, $escape);
-                $tcount = count($header);
+                if ($header = fgetcsv($fh, $lineLength, $delimiter, $enclosure, $escape)) {
+                    $tcount = count($header);
+                } else {
+                    $tcount =0;
+                    return;
+                }
             }
         }
 
